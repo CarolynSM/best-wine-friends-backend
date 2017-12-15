@@ -12,24 +12,31 @@ var bodyParser = require("body-parser");
 app.use(cors());
 app.use(bodyParser.json());
 
-// function matchFlavorToFood(flavors, foodId) {
-//   return flavors.filter(function(item) {
-//     return item.ingredientId == foodId;
-//   });
-// }
-//
-// function mergeData(food, flavors) {
-//   var test = food.map(function(foodItem) {
-//     return {
-//       id: foodItem.id,
-//       ingredient: foodItem.ingredient,
-//       flavors: matchFlavorToFood(flavors, foodItem.id)
-//     };
-//   }); console.log(test[0].flavors);
-//   return test;
-// }
-//
-// mergeData(food, flavors);
+function matchFlavorToFood(flavors, foodId) {
+  return flavors.filter(item => {
+    return item.ingredientId == foodId;
+  });
+}
+
+function mergeFoodAndFlavors(food, flavors) {
+  return food.map(foodItem => {
+    return {
+      id: foodItem.id,
+      ingredient: foodItem.ingredient,
+      flavors: matchFlavorToFood(flavors, foodItem.id)
+    };
+  });
+}
+
+function matchWineToFlavor(wine, flavorId) {
+  return wine.filter(item => {
+    for(var i=0; i<item.pairings.length; i++) {
+      if(item.pairings[i] == flavorId) {
+        return item;
+      }
+    }
+  });
+}
 
 app.get("/food", (request, response) => {
   response.json(food);
@@ -43,13 +50,18 @@ app.get("/flavors", (request, response) => {
   response.json(flavors);
 });
 
-// app.get("/pairings", function(request, response) {
-//   this is where the merged data will live
-// });
+app.get("/food-flavors", function(request, response) {
+  response.json(mergeFoodAndFlavors(food, flavors));
+});
 
 app.post("/wine", (request, response) => {
   wine.push(request);
 });
 
-
 app.listen(process.env.PORT || 3000);
+
+module.exports = {
+  matchFlavorToFood,
+  mergeFoodAndFlavors,
+  matchWineToFlavor
+};
