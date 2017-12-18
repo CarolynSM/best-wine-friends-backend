@@ -5,7 +5,7 @@ var food = [
     flavors: [1, 2, 3, 4]
   }, {
     id: 2,
-    ingredient: "Fish and Shellfish",
+    ingredient: "Fish",
     flavors: [1, 2, 3]
   }, {
     id: 3,
