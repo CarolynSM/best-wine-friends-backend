@@ -28,16 +28,6 @@ function mergeFoodAndFlavors(food, flavors) {
   });
 }
 
-function matchWineToFlavor(wine, flavorId) {
-  return wine.filter(item => {
-    for(var i=0; i<item.pairings.length; i++) {
-      if(item.pairings[i] == flavorId) {
-        return item;
-      }
-    }
-  });
-}
-
 app.get("/food", (request, response) => {
   response.json(food);
 });
@@ -63,5 +53,4 @@ app.listen(process.env.PORT || 3000);
 module.exports = {
   matchFlavorToFood,
   mergeFoodAndFlavors,
-  matchWineToFlavor
 };
