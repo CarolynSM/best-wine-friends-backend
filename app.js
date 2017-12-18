@@ -46,7 +46,8 @@ app.get("/food-flavors", function(request, response) {
 });
 
 app.post("/wine", (request, response) => {
-  console.log("it worked");
+  console.log(response
+  );
 });
 
 app.listen(process.env.PORT || 3000);
