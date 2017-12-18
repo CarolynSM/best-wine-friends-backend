@@ -23,7 +23,8 @@ function mergeFoodAndFlavors(food, flavors) {
     return {
       id: foodItem.id,
       ingredient: foodItem.ingredient,
-      flavors: matchFlavorToFood(flavors, foodItem.id)
+      flavors: matchFlavorToFood(flavors, foodItem.id),
+      imgSrc: foodItem.imgSrc
     };
   });
 }
