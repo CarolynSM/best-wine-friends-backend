@@ -46,8 +46,8 @@ app.get("/food-flavors", function(request, response) {
 });
 
 app.post("/wine", (request, response) => {
-  console.log(response
-  );
+  wine.push(request.body);
+  response.json("Suggestion added!");
 });
 
 app.listen(process.env.PORT || 3000);
